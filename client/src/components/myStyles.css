@@ -52,6 +52,7 @@ input {
   padding: 10px 10px;
   margin: 5px;
   flex: 1;
+  overflow-y: scroll;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
     rgba(0, 0, 0, 0.22) 0px 10px 10px;
 }
@@ -64,13 +65,18 @@ input {
   padding: 10px;
   border-radius: 15px;
   cursor: default;
+  margin: 8px 0;
 
   font-family: "Segoe UI", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
 }
 .con-container:hover {
   background-color: rgb(200, 206, 212);
   transition: 0.3s ease-in-out;
   transform: scale(1.03);
+}
+.con-container:active{
+  background-color: white;
 }
 
 .con-icon {
@@ -345,4 +351,98 @@ input {
   font-weight: 600;
   margin-bottom: 0.5rem;
   font-size: 20px;
+}
+
+.availableOnline{
+  flex: 0.7;
+  display: flex;
+  flex-direction: column;
+  font-family: "Segoe UI", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.avl-header{
+  background-color: white;
+  border-radius: 20px;
+  padding: 10px 5px;
+  margin: 5px;
+  display: flex;
+  align-items: center;
+  font-size: large;
+  font-weight: bold;
+  color: #363636e4;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+    rgba(0, 0, 0, 0.22) 0px 10px 10px;
+}
+
+.online-logo{
+  height: 39px;
+  width: 39px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
+}
+
+.avl-grp-area{
+  background-color: white;
+  flex: 1;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: hidden;
+  margin: 5px;
+  
+}
+
+.avl-search{
+  background-color: white;
+  border-radius: 20px;
+  padding: 10px 10px;
+  margin: 5px;
+  display: flex;
+  align-items: center;
+  
+
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+    rgba(0, 0, 0, 0.22) 0px 10px 10px;
+}
+
+input{
+  flex: 1;
+}
+
+.avlUsersAndGrps{
+  flex: 1;
+  overflow-y: scroll;
+  padding: 10px;
+  padding-bottom: 1rem;
+  
+}
+
+.avl-users-grps-container{
+  display: grid;
+  grid-template-columns: 32px auto auto;
+  grid-template-rows: auto auto;
+  column-gap: 10px;
+  padding: 10px;
+  border-radius: 15px;
+  cursor: default;
+  background-color: white;
+  border-radius: 20px;
+  padding: 10px 10px;
+  margin: 7px;
+  color: #616e68;
+
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
+.avl-users-grps-container:hover{
+  background-color: rgb(200, 206, 212);
+  transition: 0.3s ease-in-out;
+  transform: scale(1.00005);
+  
+}
+
+.avl-users-grps-container:active{
+  background-color: white;
 }

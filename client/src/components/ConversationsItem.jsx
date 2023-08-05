@@ -1,6 +1,7 @@
-import './myStyles.css'
+import { Link } from "react-router-dom";
+import "./myStyles.css";
 
-const ConversationsItem = ({props}) => {
+const ConversationsItem = ({ props }) => {
   return (
     <div className="con-container">
       <p className="con-icon">{props.name[0]}</p>
@@ -8,6 +9,7 @@ const ConversationsItem = ({props}) => {
       <p className="con-lastMessage">{props.lastMessage}</p>
       <p className="con-timeStamp">{props.timeStamp}</p>
     </div>
+    
   );
 };
 

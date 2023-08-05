@@ -22,8 +22,10 @@ const ChatArea = () => {
         <MsgOthers />
         <MsgSelf />
         <MsgOthers />
-        <MsgSelf /><MsgOthers />
-        <MsgSelf /><MsgOthers />
+        <MsgSelf />
+        <MsgOthers />
+        <MsgSelf />
+        <MsgOthers />
         <MsgSelf />
       </div>
       <div className="textSent">

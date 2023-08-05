@@ -8,7 +8,10 @@ const Login = () => {
     <div className="login-container">
       <div className="login-logo-area">
         <img src={logo} alt="logo" className="login-logo" />
-        <p className='welcome-text'> Every 'hello' is a chance to find a friend for a lifetime.</p>
+        <p className="welcome-text">
+          {" "}
+          Every 'hello' is a chance to find a friend for a lifetime.
+        </p>
       </div>
       <div className="login-area">
         <p className="login-heading">Login to your Account</p>
