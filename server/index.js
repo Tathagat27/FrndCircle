@@ -5,7 +5,13 @@ const { default: mongoose } = require("mongoose");
 const app = express();
 dotenv.config();
 
-console.log(mongoose.connect(process.env.MONGO_URI));
+
+const connectDb = async () => {
+    const connect = await mongoose.connect(process.env.MONGO_URI);
+    console.log("Server is connected to DB");
+}
+
+connectDb();
 
 app.get("/", (req, res) => {
   res.send("From API :)");
