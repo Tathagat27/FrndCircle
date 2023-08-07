@@ -277,6 +277,26 @@ input {
   font-style: oblique;
   color: #747474;
   margin-top: 1rem;
+
+}
+
+.hello-msg{
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+    font-size: 15px;
+    color: rgb(98, 105, 103);
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
+
+.wavingHand{
+  height: 20px;
+  width: 20px;
+  margin: 0 0.5rem;
+  padding-bottom: 0.1rem;
 }
 
 .createGroup {
@@ -338,6 +358,8 @@ input {
   justify-content: center;
   align-items: center;
   gap: 1rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
     rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
@@ -346,12 +368,63 @@ input {
 
 .login-heading {
   color: rgb(4, 209, 161);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-weight: 600;
   margin-bottom: 0.5rem;
   font-size: 20px;
 }
+
+
+.signup-container {
+  background: linear-gradient(#58dcfa6b, #86e6b8a9);
+  height: 90vh;
+  width: 90vw;
+  display: flex;
+  border-radius: 20px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+.signup-logo-area {
+  flex: 0.3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.signup-logo {
+  height: 150px;
+  width: auto;
+}
+
+.signup-area {
+  flex: 0.7;
+  display: flex;
+  flex-direction: column;
+
+  background-color: white;
+  border-radius: 20px;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+.signup-heading {
+  color: rgb(4, 209, 161);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  font-size: 20px;
+}
+
+
 
 .availableOnline{
   flex: 0.7;

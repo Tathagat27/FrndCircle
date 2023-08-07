@@ -7,11 +7,16 @@ import ChatArea from "./components/ChatArea";
 import CreateGroup from "./components/CreateGroup";
 import OnlineUsers from "./components/OnlineUsers";
 import AvailableGroups from "./components/AvailableGroups";
+import Signup from "./components/Signup";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Login />,
+  },
+  {
+    path: "/signup",
+    element: <Signup />,
   },
   {
     path: "app",

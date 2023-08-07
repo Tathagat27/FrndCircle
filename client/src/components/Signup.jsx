@@ -1,16 +1,15 @@
-import "./myStyles.css";
-import logo from "../assets/chat.png";
 import { Backdrop, Button, CircularProgress, TextField } from "@mui/material";
+import logo from "../assets/chat.png";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
-import Toaster from "./Toaster";
 import axios from "axios";
+import { useState } from "react";
+import Toaster from "./Toaster.jsx";
 
-const Login = () => {
+const Signup = () => {
 
-  const [userData, setUserData] = useState({name: "", password: ""});
+  const [userData, setUserData] = useState({name: "", email: "", password: ""});
   const [loading, setLoading] = useState(false);
-  const [loginStatus, setSignupStatus] = useState("");
+  const [signupStatus, setSignupStatus] = useState("");
 
   const nav = useNavigate();
 
@@ -19,7 +18,7 @@ const Login = () => {
   }
 
 
-  const loginHandler = async () => {
+  const signupHandler = async () => {
     setLoading(true);
     try{
       const config = {
@@ -29,7 +28,7 @@ const Login = () => {
       };
 
       const response = await axios.post(
-        "http://localhost:8080/user/login/",
+        "http://localhost:8080/user/signup/",
         userData,
         config
       );
@@ -63,40 +62,40 @@ const Login = () => {
   }
 
   return (
-    <div className="login-container">
+    <div className="signup-container">
     <Backdrop sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1}} open={loading}>
       <CircularProgress color="secondary" />
     </Backdrop>
-      <div className="login-logo-area">
-        <img src={logo} alt="logo" className="login-logo" />
+      <div className="signup-logo-area">
+        <img src={logo} alt="logo" className="signup-logo" />
         <p className="welcome-text">
-       
           {`Every 'hello' is a chance to find a friend for a lifetime.`}
         </p>
       </div>
-      <div className="login-area">
-        <p className="login-heading">Login to your Account</p>
+      <div className="signup-area">
+        <p className="signup-heading">Create your Account</p>
 
         <TextField onChange={changeHandler} id="standard-basic" label="Username" variant="outlined" name="name" />
+        <TextField onChange={changeHandler} id="standard-basic" label="Email" variant="outlined" name="email" />
         <TextField
-          onChange={changeHandler} 
-          id="outlined-password-input"
+          onChange={changeHandler} id="outlined-password-input"
           label="Password"
           type="password"
           autoComplete="current-password"
           name="password"
         />
-        <Button variant="outlined" onClick={loginHandler}>Login</Button>
+        <Button variant="outlined" onClick={signupHandler}>Sign Up</Button>
+        <p>{`Already have an Account? `} <Link to={"/"} style={{textDecoration: 'none', color: 'blue'}}>Login</Link>  
+        </p>
 
-        <p>{`Don't have an Account? `} <Link to={"/signup"} style={{textDecoration: 'none', color: 'blue'}} > Signup</Link></p>
-        
-        { loginStatus ? (
-          <Toaster key={loginStatus.key} message={loginStatus.msg} />
+        { signupStatus ? (
+          <Toaster key={signupStatus.key} message={signupStatus.msg} />
         ) : null}
-
+          
+        
       </div>
     </div>
   );
 };
 
-export default Login;
+export default Signup;
