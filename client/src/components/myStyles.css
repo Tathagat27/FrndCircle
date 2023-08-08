@@ -1,3 +1,8 @@
+.dark {
+  background-color: #44494d !important;
+  color: lightgray !important;
+}
+
 .mainContainer {
   background-color: rgb(200, 206, 212);
   height: 90vh;
@@ -68,14 +73,13 @@ input {
   margin: 8px 0;
 
   font-family: "Segoe UI", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-
 }
 .con-container:hover {
   background-color: rgb(200, 206, 212);
   transition: 0.3s ease-in-out;
   transform: scale(1.03);
 }
-.con-container:active{
+.con-container:active {
   background-color: white;
 }
 
@@ -170,8 +174,6 @@ input {
   background-color: white;
   margin-top: 0.2rem;
   overflow-y: scroll;
-
-  
 }
 ::-webkit-scrollbar {
   width: 0.3rem;
@@ -225,7 +227,8 @@ input {
   flex-direction: column;
   overflow-wrap: break-word;
   max-width: 30vw;
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+    rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
 
 .msg-time {
@@ -247,7 +250,8 @@ input {
   margin-right: 0.6rem;
 
   max-width: 30vw;
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+    rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
 
 .welcome {
@@ -268,6 +272,11 @@ input {
 .welcome-logo {
   height: 232px;
   width: 232px;
+
+}
+
+.welcome-logo:hover{
+  cursor: grab;
 }
 
 .welcome-text {
@@ -277,14 +286,13 @@ input {
   font-style: oblique;
   color: #747474;
   margin-top: 1rem;
-
 }
 
-.hello-msg{
+.hello-msg {
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
-    font-size: 15px;
-    color: rgb(98, 105, 103);
+  font-size: 18px;
+  color: rgb(127, 209, 209);
   margin-top: 1rem;
   display: flex;
   justify-content: center;
@@ -292,7 +300,7 @@ input {
   font-weight: bold;
 }
 
-.wavingHand{
+.wavingHand {
   height: 20px;
   width: 20px;
   margin: 0 0.5rem;
@@ -373,7 +381,6 @@ input {
   font-size: 20px;
 }
 
-
 .signup-container {
   background: linear-gradient(#58dcfa6b, #86e6b8a9);
   height: 90vh;
@@ -424,16 +431,14 @@ input {
   font-size: 20px;
 }
 
-
-
-.availableOnline{
+.availableOnline {
   flex: 0.7;
   display: flex;
   flex-direction: column;
   font-family: "Segoe UI", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.avl-header{
+.avl-header {
   background-color: white;
   border-radius: 20px;
   padding: 10px 5px;
@@ -447,7 +452,7 @@ input {
     rgba(0, 0, 0, 0.22) 0px 10px 10px;
 }
 
-.online-logo{
+.online-logo {
   height: 39px;
   width: 39px;
   display: flex;
@@ -456,7 +461,7 @@ input {
   overflow: auto;
 }
 
-.avl-grp-area{
+.avl-grp-area {
   background-color: white;
   flex: 1;
   border-radius: 20px;
@@ -464,35 +469,32 @@ input {
   flex-direction: column;
   overflow-y: hidden;
   margin: 5px;
-  
 }
 
-.avl-search{
+.avl-search {
   background-color: white;
   border-radius: 20px;
   padding: 10px 10px;
   margin: 5px;
   display: flex;
   align-items: center;
-  
 
   box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
     rgba(0, 0, 0, 0.22) 0px 10px 10px;
 }
 
-input{
+input {
   flex: 1;
 }
 
-.avlUsersAndGrps{
+.avlUsersAndGrps {
   flex: 1;
   overflow-y: scroll;
   padding: 10px;
   padding-bottom: 1rem;
-  
 }
 
-.avl-users-grps-container{
+.avl-users-grps-container {
   display: grid;
   grid-template-columns: 32px auto auto;
   grid-template-rows: auto auto;
@@ -506,16 +508,16 @@ input{
   margin: 7px;
   color: #616e68;
 
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }
 
-.avl-users-grps-container:hover{
+.avl-users-grps-container:hover {
   background-color: rgb(200, 206, 212);
   transition: 0.3s ease-in-out;
   transform: scale(1.00005);
-  
 }
 
-.avl-users-grps-container:active{
+.avl-users-grps-container:active {
   background-color: white;
 }
