@@ -75,8 +75,8 @@ const Signup = () => {
       <div className="signup-area">
         <p className="signup-heading">Create your Account</p>
 
-        <TextField onChange={changeHandler} id="standard-basic" label="Username" variant="outlined" name="name" />
-        <TextField onChange={changeHandler} id="standard-basic" label="Email" variant="outlined" name="email" />
+        <TextField onChange={changeHandler} label="Username" variant="outlined" name="name" />
+        <TextField onChange={changeHandler} label="Email" variant="outlined" name="email" />
         <TextField
           onChange={changeHandler} id="outlined-password-input"
           label="Password"

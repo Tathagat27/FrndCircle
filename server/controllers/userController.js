@@ -20,7 +20,6 @@ export const loginController = async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
-      isAdmin: user.isAdmin,
       token: generateToken(user._id),
     });
   } else {
@@ -54,12 +53,13 @@ export const signupController = expressAsyncHandler(async (req, res) => {
   // Create an entry  in the db
   const user = await User.create({ name, email, password });
 
+  console.log(user);
+
   if (user) {
     res.status(201).json({
       _id: user._id,
       name: user.name,
       email: user.email,
-      isAdmin: user.isAdmin,
       token: generateToken(user._id),
     });
   } else {
