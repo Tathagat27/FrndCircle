@@ -7,7 +7,7 @@ import { Router as messageRoutes } from "./routes/messageRoutes.js";
 
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 
-import cors from 'cors'
+import cors from 'cors';
 
 const app = express();
 dotenv.config();

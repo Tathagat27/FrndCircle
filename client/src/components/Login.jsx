@@ -43,18 +43,24 @@ const Login = () => {
     }
    catch (error) {
     console.log(error);
-    if(error.response.status === 400){
+    if(error.response && error.response.status === 400){
         setLogInStatus({
           msg: "All necessary input fields have not been filled",
           key: Math.random()
         })
       }
-    else if(error.response.status === 401){
+    else if(error.response && error.response.status === 401){
        setLogInStatus({
         msg: "Invalid User name or Password",
         key: Math.random(),
       }); 
       }
+    else{
+      setLogInStatus({
+        msg: "Network Error",
+        key: Math.random()
+      })
+    }
       
     }
 

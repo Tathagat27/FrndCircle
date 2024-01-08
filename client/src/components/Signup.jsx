@@ -42,21 +42,27 @@ const Signup = () => {
     }
     catch(error){
       console.log(error);
-      if(error.response.status === 400){
+      if(error.response && error.response.status === 400){
         setSignupStatus({
           msg: "All necessary input fields have not been filled",
           key: Math.random()
         })
       }
-      else if(error.response.status === 405){
+      else if(error.response && error.response.status === 405){
         setSignupStatus({
           msg: "User with this email ID already exists",
           key: Math.random()
         })
       }
-      else if(error.response.status == 406){
+      else if(error.response && error.response.status == 406){
         setSignupStatus({
           msg: "Username already Taken, Please choose another Username",
+          key: Math.random()
+        })
+      }
+      else{
+        setSignupStatus({
+          msg: "Network Error",
           key: Math.random()
         })
       }

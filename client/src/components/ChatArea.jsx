@@ -5,8 +5,8 @@ import SendIcon from "@mui/icons-material/Send";
 import MsgOthers from "./MsgOthers";
 import MsgSelf from "./MsgSelf";
 
-import React, { useContext, useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useContext, useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Skeleton from "@mui/material/Skeleton";
 import axios from "axios";
@@ -41,7 +41,7 @@ const ChatArea = () => {
         },
         config
       )
-      .then(({ data }) => {
+      .then(() => {
         console.log("Message Fired");
       });
   };
