@@ -8,7 +8,7 @@ export const loginController = async (req, res) => {
 
   // Check for all fields
   if (!name || !password) {
-    res.send(400);
+    res.sendStatus(400);
     throw new Error("All necessary input fields have not been filled");
   }
 
@@ -23,6 +23,7 @@ export const loginController = async (req, res) => {
       token: generateToken(user._id),
     });
   } else {
+    res.sendStatus(401);
     throw new Error("Invalid Username or Password");
   }
 };
@@ -32,7 +33,7 @@ export const signupController = expressAsyncHandler(async (req, res) => {
 
   // Check for all fields
   if (!name || !email || !password) {
-    res.send(400);
+    res.sendStatus(400);
     throw new Error("All necessary input fields have not been filled");
   }
 
@@ -40,6 +41,7 @@ export const signupController = expressAsyncHandler(async (req, res) => {
 
   const emailExist = await User.findOne({ email });
   if (emailExist) {
+    res.sendStatus(405);
     throw new Error("Email already exists");
   }
 
@@ -47,6 +49,7 @@ export const signupController = expressAsyncHandler(async (req, res) => {
 
   const userExist = await User.findOne({ name });
   if (userExist) {
+    res.sendStatus(406);
     throw new Error("Username already exists");
   }
 

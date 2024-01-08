@@ -27,7 +27,7 @@ const router = createBrowserRouter([
         element: <Welcome />,
       },
       {
-        path: "chat",
+        path: "chat/:id",
         element: <ChatArea />,
       },
       {

@@ -2,6 +2,11 @@ import express from 'express';
 import * as dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import { Router as userRoutes } from "./routes/userRoutes.js";
+import { Router as chatRoutes } from "./routes/chatRoutes.js";
+import { Router as messageRoutes } from "./routes/messageRoutes.js";
+
+import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
+
 import cors from 'cors'
 
 const app = express();
@@ -26,6 +31,12 @@ app.get("/", (req, res) => {
 });
 
 app.use("/user", userRoutes);
+app.use("/chat", chatRoutes);
+app.use("/message", messageRoutes);
+
+// Error Handling middlewares
+app.use(notFound);
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 

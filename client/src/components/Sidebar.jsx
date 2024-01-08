@@ -117,7 +117,7 @@ const Sidebar = () => {
       </div>
 
       <div  className={"sb-chat" + (lightTheme ? "" : " dark")}>
-        {conversations.map((conversation) => {
+        {conversations.map((conversation, index) => {
 
            // console.log("current convo : ", conversation);
            if (conversation.users.length === 1) {
@@ -148,6 +148,7 @@ const Sidebar = () => {
                   }}
                   // dispatch change to refresh so as to update chatArea
                 >
+                <div className="con-container">
                   <p className={"con-icon" + (lightTheme ? "" : " dark")}>
                     {conversation.users[1].name[0]}
                   </p>
@@ -156,11 +157,12 @@ const Sidebar = () => {
                   </p>
 
                   <p className="con-lastMessage">
-                    No previous Messages, click here to start a new chat
+                    No previous Messages
                   </p>
                   {/* <p className={"con-timeStamp" + (lightTheme ? "" : " dark")}>
                 {conversation.timeStamp}
               </p> */}
+              </div>
                 </div>
               </div>
             );
@@ -178,6 +180,7 @@ const Sidebar = () => {
                   );
                 }}
               >
+              <div className="con-container">
                 <p className={"con-icon" + (lightTheme ? "" : " dark")}>
                   {conversation.users[1].name[0]}
                 </p>
@@ -191,6 +194,7 @@ const Sidebar = () => {
                 {/* <p className={"con-timeStamp" + (lightTheme ? "" : " dark")}>
                 {conversation.timeStamp}
               </p> */}
+              </div>
               </div>
             );
           }

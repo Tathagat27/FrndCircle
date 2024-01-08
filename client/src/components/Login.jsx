@@ -10,7 +10,7 @@ const Login = () => {
 
   const [userData, setUserData] = useState({name: "", password: ""});
   const [loading, setLoading] = useState(false);
-  const [loginStatus, setSignupStatus] = useState("");
+  const [loginStatus, setLogInStatus] = useState("");
 
   const nav = useNavigate();
 
@@ -36,25 +36,26 @@ const Login = () => {
 
       console.log(response);
 
-      setSignupStatus({ msg: "Success", key: Math.random() });
+      setLogInStatus({ msg: "Success", key: Math.random() });
       nav("/app/welcome")
       localStorage.setItem("userData", JSON.stringify(response));
 
     }
-    catch(error){
-      console.log(error.response.data);
-      if(error.response.status === 405){
-        setSignupStatus({
-          msg: "USer with this email ID already exists",
+   catch (error) {
+    console.log(error);
+    if(error.response.status === 400){
+        setLogInStatus({
+          msg: "All necessary input fields have not been filled",
           key: Math.random()
         })
       }
-      if(error.response.status == 406){
-        setSignupStatus({
-          msg: "User Name already Taken, Please choose another Username",
-          key: Math.random()
-        })
+    else if(error.response.status === 401){
+       setLogInStatus({
+        msg: "Invalid User name or Password",
+        key: Math.random(),
+      }); 
       }
+      
     }
 
       
