@@ -13,12 +13,11 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleTheme } from "../features/themeSlice";
 import axios from "axios";
-import { refreshSidebarFun } from "../features/refreshSidebar";
+// import { refreshSidebarFun } from "../features/refreshSidebar";
 import { myContext } from "./MainContainer";
 
 
 import { IconButton } from "@mui/material";
-import ConversationsItem from "./ConversationsItem";
 import { Link } from "react-router-dom";
 
 const Sidebar = () => {
@@ -39,6 +38,7 @@ const Sidebar = () => {
   }
 
   const user = userData.data;
+  
   useEffect(() => {
     // console.log("Sidebar : ", user.token);
     const config = {
@@ -119,12 +119,16 @@ const Sidebar = () => {
       <div  className={"sb-chat" + (lightTheme ? "" : " dark")}>
         {conversations.map((conversation, index) => {
 
-           // console.log("current convo : ", conversation);
-           if (conversation.users.length === 1) {
+          console.log("current convo : ", conversation.users);
+          if (conversation.users.length === 1) {
             return <div key={index}></div>;
           }
-          if (conversation.latestMessage === undefined) {
+
+          const chatUserName = (user.name === conversation.users[0].name) ? conversation.users[1].name : conversation.users[0].name;
+          
+          if (conversation.latestMessage === undefined || conversation.latestMessage === null) {
             // console.log("No Latest Message with ", conversation.users[1]);
+
 
           return (
             <div
@@ -143,17 +147,17 @@ const Sidebar = () => {
                       "chat/" +
                         conversation._id +
                         "&" +
-                        conversation.users[1].name
+                        chatUserName
                     );
                   }}
                   // dispatch change to refresh so as to update chatArea
                 >
                 <div className="con-container">
                   <p className={"con-icon" + (lightTheme ? "" : " dark")}>
-                    {conversation.users[1].name[0]}
+                    {chatUserName[0]}
                   </p>
                   <p className={"con-title" + (lightTheme ? "" : " dark")}>
-                    {conversation.users[1].name}
+                    {chatUserName}
                   </p>
 
                   <p className="con-lastMessage">
@@ -176,16 +180,16 @@ const Sidebar = () => {
                     "chat/" +
                       conversation._id +
                       "&" +
-                      conversation.users[1].name
+                      chatUserName
                   );
                 }}
               >
               <div className="con-container">
                 <p className={"con-icon" + (lightTheme ? "" : " dark")}>
-                  {conversation.users[1].name[0]}
+                  {chatUserName[0]}
                 </p>
                 <p className={"con-title" + (lightTheme ? "" : " dark")}>
-                  {conversation.users[1].name}
+                  {chatUserName}
                 </p>
 
                 <p className="con-lastMessage">

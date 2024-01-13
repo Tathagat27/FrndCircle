@@ -9,7 +9,7 @@ export const loginController = async (req, res) => {
   // Check for all fields
   if (!name || !password) {
     res.sendStatus(400);
-    throw new Error("All necessary input fields have not been filled");
+    // throw new Error("All necessary input fields have not been filled");
   }
 
   const user = await User.findOne({ name });
@@ -24,7 +24,7 @@ export const loginController = async (req, res) => {
     });
   } else {
     res.sendStatus(401);
-    throw new Error("Invalid Username or Password");
+    // throw new Error("Invalid Username or Password");
   }
 };
 
@@ -34,7 +34,7 @@ export const signupController = expressAsyncHandler(async (req, res) => {
   // Check for all fields
   if (!name || !email || !password) {
     res.sendStatus(400);
-    throw new Error("All necessary input fields have not been filled");
+    // throw new Error("All necessary input fields have not been filled");
   }
 
   // pre-existing email
@@ -42,7 +42,7 @@ export const signupController = expressAsyncHandler(async (req, res) => {
   const emailExist = await User.findOne({ email });
   if (emailExist) {
     res.sendStatus(405);
-    throw new Error("Email already exists");
+    // throw new Error("Email already exists");
   }
 
   // pre-existing userName
@@ -50,7 +50,7 @@ export const signupController = expressAsyncHandler(async (req, res) => {
   const userExist = await User.findOne({ name });
   if (userExist) {
     res.sendStatus(406);
-    throw new Error("Username already exists");
+    // throw new Error("Username already exists");
   }
 
   // Create an entry  in the db
@@ -67,7 +67,7 @@ export const signupController = expressAsyncHandler(async (req, res) => {
     });
   } else {
     res.status(400);
-    throw new Error("Registration Error");
+    // throw new Error("Registration Error");
   }
 });
 

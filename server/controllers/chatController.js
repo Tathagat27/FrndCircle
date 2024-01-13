@@ -5,6 +5,8 @@ import {User} from "../models/userModel.js";
 export const accessChat = asyncHandler(async (req, res) => {
   const { userId } = req.body;
 
+  console.log(userId);
+
   if (!userId) {
     console.log("UserId param not sent with request");
     return res.sendStatus(400);
@@ -25,6 +27,8 @@ export const accessChat = asyncHandler(async (req, res) => {
     select: "name email",
   });
 
+  console.log(isChat);
+
   if (isChat.length > 0) {
     res.send(isChat[0]);
   } else {
@@ -43,7 +47,7 @@ export const accessChat = asyncHandler(async (req, res) => {
       res.status(200).json(FullChat);
     } catch (error) {
       res.status(400);
-      throw new Error(error.message);
+      // throw new Error(error.message);
     }
   }
 });
@@ -65,7 +69,7 @@ export const fetchChats = asyncHandler(async (req, res) => {
       });
   } catch (error) {
     res.status(400);
-    throw new Error(error.message);
+    // throw new Error(error.message);
   }
 });
 
@@ -75,7 +79,7 @@ export const fetchGroups = asyncHandler(async (req, res) => {
     res.status(200).send(allGroups);
   } catch (error) {
     res.status(400);
-    throw new Error(error.message);
+    // throw new Error(error.message);
   }
 });
 
@@ -103,7 +107,7 @@ export const createGroupChat = asyncHandler(async (req, res) => {
     res.status(200).json(fullGroupChat);
   } catch (error) {
     res.status(400);
-    throw new Error(error.message);
+    // throw new Error(error.message);
   }
 });
 
@@ -126,7 +130,7 @@ export const groupExit = asyncHandler(async (req, res) => {
 
   if (!removed) {
     res.status(404);
-    throw new Error("Chat Not Found");
+    // throw new Error("Chat Not Found");
   } else {
     res.json(removed);
   }

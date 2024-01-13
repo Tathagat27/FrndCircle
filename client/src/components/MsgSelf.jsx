@@ -1,14 +1,15 @@
-import React from "react";
 import "./myStyles.css";
 
-const MsgSelf = () => {
+const MsgSelf = ({props}) => {
   return (
       <div className="self-text-content">
-      
+     
         <p className="text-msg">
-          I'm fine...How about you ??ddddddddddddddddnnnnnnnnnnnnnnnnnnndnnnnnnnnnndn
+          {props.content}
         </p>
-        <p className="msg-time">12:05</p>
+      
+        
+        {/* <p className="msg-time">12:05</p> */}
       </div>
   );
 };

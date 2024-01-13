@@ -15,9 +15,9 @@ import { myContext } from "./MainContainer";
 const ChatArea = () => {
   const lightTheme = useSelector((state) => state.themeKey);
   const [messageContent, setMessageContent] = useState("");
-  const messagesEndRef = useRef(null);
   const dyParams = useParams();
-  const [chat_id, chat_user] = dyParams._id.split("&");
+  // console.log(dyParams);
+  const [chat_id, chat_user] = dyParams.id.split("&");
   // console.log(chat_id, chat_user);
   const userData = JSON.parse(localStorage.getItem("userData"));
   const [allMessages, setAllMessages] = useState([]);
@@ -45,9 +45,10 @@ const ChatArea = () => {
         console.log("Message Fired");
       });
   };
-  // const scrollToBottom = () => {
-  //   messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  // };
+  const messagesEndRef = useRef(null);
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+  };
 
   useEffect(() => {
     console.log("Users refreshed");
@@ -61,9 +62,10 @@ const ChatArea = () => {
       .then(({ data }) => {
         setAllMessages(data);
         setloaded(true);
+        scrollToBottom();
         // console.log("Data from Acess Chat API ", data);
       });
-    // scrollToBottom();
+      
   }, [refresh, chat_id, userData.data.token]);
 
   if (!loaded) {
@@ -72,7 +74,7 @@ const ChatArea = () => {
         style={{
           border: "20px",
           padding: "10px",
-          width: "100%",
+          flex: "0.7",
           display: "flex",
           flexDirection: "column",
           gap: "10px",
@@ -101,28 +103,29 @@ const ChatArea = () => {
   } else {
     return (
       <div className={"chatArea-container" + (lightTheme ? "" : " dark")}>
-        <div className={"chatArea-header" + (lightTheme ? "" : " dark")}>
+        <div className={"ca-header" + (lightTheme ? "" : " dark")}>
           <p className={"con-icon" + (lightTheme ? "" : " dark")}>
             {chat_user[0]}
           </p>
-          <div className={"header-text" + (lightTheme ? "" : " dark")}>
-            <p className={"con-title" + (lightTheme ? "" : " dark")}>
+          <div className={"curr-chatUser" + (lightTheme ? "" : " dark")}>
+            <p className={"ca-title" + (lightTheme ? "" : " dark")}>
               {chat_user}
             </p>
             {/* <p className={"con-timeStamp" + (lightTheme ? "" : " dark")}>
               {props.timeStamp}
             </p> */}
           </div>
-          <IconButton className={"icon" + (lightTheme ? "" : " dark")}>
+          <IconButton className={"ca-delete" + (lightTheme ? "" : " dark")}>
             <DeleteIcon />
           </IconButton>
         </div>
-        <div className={"messages-container" + (lightTheme ? "" : " dark")}>
+        
+        <div className={"message-container" + (lightTheme ? "" : " dark")}>
           {allMessages
             .slice(0)
-            .reverse()
             .map((message, index) => {
               const sender = message.sender;
+              
               const self_id = userData.data._id;
               if (sender._id === self_id) {
                 // console.log("I sent it ");
@@ -132,8 +135,9 @@ const ChatArea = () => {
                 return <MsgOthers props={message} key={index} />;
               }
             })}
+            <div ref={messagesEndRef} />
         </div>
-        <div ref={messagesEndRef} className="BOTTOM" />
+        
         <div className={"text-input-area" + (lightTheme ? "" : " dark")}>
           <input
             placeholder="Type a Message"

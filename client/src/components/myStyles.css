@@ -20,6 +20,7 @@
   flex: 0.3;
   display: flex;
   flex-direction: column;
+  margin-right: 3px;
 }
 
 .sb-header {
@@ -75,7 +76,7 @@ input {
   font-family: "Segoe UI", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 .con-container:hover {
-  background-color: rgb(200, 206, 212);
+  background-color: rgba(200, 206, 212, 0.5);
   transition: 0.3s ease-in-out;
   transform: scale(1.03);
 }
@@ -123,6 +124,29 @@ input {
   font-size: 0.85rem;
 }
 
+.chat-icon {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #d9d9d9;
+
+  font-size: 1.3rem;
+  font-weight: bolder;
+  color: white;
+  height: 1.3rem;
+  width: 1.3rem;
+  padding: 2px;
+
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
+    rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+
 .chatArea-container {
   display: flex;
   flex-direction: column;
@@ -138,9 +162,9 @@ input {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0.5rem 0.4rem;
-  border-radius: 20px;
-  padding: 0 0.5rem;
+  margin: 0.3rem 0.3rem 0.3rem 0.3rem;
+  border-radius: 15px 15px 2px 2px;
+  padding: 0.6rem 0.5rem;
   background-color: white;
 
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
@@ -210,7 +234,7 @@ input {
   display: grid;
   grid-template-columns: 32px auto auto;
   grid-template-rows: auto auto;
-  column-gap: 10px;
+
   padding: 10px;
   border-radius: 15px;
   cursor: default;
@@ -247,7 +271,7 @@ input {
   display: flex;
   flex-direction: column;
   overflow-wrap: break-word;
-  margin-right: 0.6rem;
+  margin: 0.2rem;
 
   max-width: 30vw;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
@@ -257,7 +281,7 @@ input {
 .welcome {
   display: flex;
   flex-direction: column;
-  overflow: auto;
+  overflow: hidden;
   padding: 1rem;
   flex: 0.7;
   justify-content: center;
@@ -505,7 +529,7 @@ input {
   background-color: white;
   border-radius: 20px;
   padding: 10px 10px;
-  margin: 7px;
+  margin: 9px 7px;
   color: #616e68;
 
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
@@ -513,9 +537,9 @@ input {
 }
 
 .avl-users-grps-container:hover {
-  background-color: rgb(200, 206, 212);
+  background-color: rgb(200, 206, 212, 0.5);
   transition: 0.3s ease-in-out;
-  transform: scale(1.00005);
+  transform: scale(1.005);
 }
 
 .avl-users-grps-container:active {

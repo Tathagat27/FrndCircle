@@ -12,7 +12,7 @@ export const allMessages = expressAsyncHandler(async (req, res) => {
     res.json(messages);
   } catch (error) {
     res.status(400);
-    throw new Error(error.message);
+    // throw new Error(error.message);
   }
 });
 
@@ -46,6 +46,6 @@ export const sendMessage = expressAsyncHandler(async (req, res) => {
     res.json(message);
   } catch (error) {
     res.status(400);
-    throw new Error(error.message);
+    // throw new Error(error.message);
   }
 });

@@ -8,6 +8,7 @@ import CreateGroup from "./components/CreateGroup";
 import OnlineUsers from "./components/OnlineUsers";
 import AvailableGroups from "./components/AvailableGroups";
 import Signup from "./components/Signup";
+import { useSelector } from "react-redux";
 
 const router = createBrowserRouter([
   {
@@ -47,8 +48,9 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  const lightTheme = useSelector((state) => state.themeKey);
   return (
-    <div className="app">
+    <div className={"app" + (lightTheme ? "" : " dark")}>
       <RouterProvider router={router} />
     </div>
   );
