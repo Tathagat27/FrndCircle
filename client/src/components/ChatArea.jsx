@@ -12,6 +12,12 @@ import Skeleton from "@mui/material/Skeleton";
 import axios from "axios";
 import { myContext } from "./MainContainer";
 
+import io from "socket.io-client";
+
+const ENDPOINT = "http://localhost:8080";
+
+let socket,chat;
+
 const ChatArea = () => {
   const lightTheme = useSelector((state) => state.themeKey);
   const [messageContent, setMessageContent] = useState("");
@@ -21,12 +27,18 @@ const ChatArea = () => {
   // console.log(chat_id, chat_user);
   const userData = JSON.parse(localStorage.getItem("userData"));
   const [allMessages, setAllMessages] = useState([]);
+
+  const [allMessagesCopy, setAllMessagesCopy] = useState([]);
   // console.log("Chat area id : ", chat_id._id);
   // const refresh = useSelector((state) => state.refreshKey);
   const { refresh, setRefresh } = useContext(myContext);
   const [loaded, setloaded] = useState(false);
+
+  const [socketConnectionStatus, setSocketConnectionStatus] = useState(false);
+
   const sendMessage = () => {
     // console.log("SendMessage Fired to", chat_id._id);
+    let data = null;
     const config = {
       headers: {
         Authorization: `Bearer ${userData.data.token}`,
@@ -41,10 +53,40 @@ const ChatArea = () => {
         },
         config
       )
-      .then(() => {
+      .then(({response}) => {
+        data = response;
         console.log("Message Fired");
       });
+
+      socket.emit("newMessage", data);
   };
+
+  // connect to socket
+
+  useEffect(() => {
+    console.log("first useEffect");
+    socket = io(ENDPOINT);
+    socket.emit("setup", userData);
+    socket.on("connection", () => {
+      setSocketConnectionStatus(!socketConnectionStatus);
+    });
+  }, []);
+
+  // new message recieved
+
+  useEffect(() => {
+    console.log("2nd useEffect");
+    socket.on("message recieved", (newMessage) => {
+      if(!allMessagesCopy || allMessagesCopy._id !== newMessage._id){
+        //  setAllMessages([...allMessages], newMessage);
+      }
+      else{
+        setAllMessages([...allMessages], newMessage);
+      }
+    });
+  }, []);
+
+
   const messagesEndRef = useRef(null);
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
@@ -64,9 +106,10 @@ const ChatArea = () => {
         setloaded(true);
         scrollToBottom();
         // console.log("Data from Acess Chat API ", data);
+        socket.emit("join chat", chat_id);
       });
-      
-  }, [refresh, chat_id, userData.data.token]);
+      setAllMessagesCopy(allMessages);
+  }, [refresh, chat_id, userData.data.token, allMessages]);
 
   if (!loaded) {
     return (
