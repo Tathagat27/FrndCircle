@@ -25,7 +25,7 @@ const Sidebar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const lightTheme = useSelector((state) => state.themeKey);
-  // const refresh = useSelector((state) => state.refreshKey);
+  const refreshSidebar = useSelector((state) => state.refreshKey);
   const { refresh, setRefresh } = useContext(myContext);
   console.log("Context API : refresh : ", refresh);
   const [conversations, setConversations] = useState([]);
@@ -70,7 +70,7 @@ const Sidebar = () => {
       setConversations(response.data);
       // setRefresh(!refresh);
     });
-  }, [refresh]);
+  }, [refresh, refreshSidebar]);
 
   return (
     

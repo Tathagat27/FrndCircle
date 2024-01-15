@@ -43,6 +43,22 @@ const OnlineUsers = () => {
       
   }
 
+  const createChat = (user) => {
+    console.log("Creating chat with ", user.name);
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userData.data.token}`,
+      },
+    };
+    axios.post(
+      "http://localhost:8080/chat/",
+      {
+        userId: user._id,
+      },
+      config
+    );
+  }
+
   useEffect(() => {
     console.log("Users refreshed");
 
@@ -109,19 +125,7 @@ const OnlineUsers = () => {
                 className={"list-tem" + (lightTheme ? "" : " dark")}
                 key={index}
                 onClick={() => {
-                  console.log("Creating chat with ", user.name);
-                  const config = {
-                    headers: {
-                      Authorization: `Bearer ${userData.data.token}`,
-                    },
-                  };
-                  axios.post(
-                    "http://localhost:8080/chat/",
-                    {
-                      userId: user._id,
-                    },
-                    config
-                  );
+                  createChat(user);
                   dispatch(refreshSidebarFun());
                 }}
               >
