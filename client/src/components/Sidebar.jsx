@@ -8,6 +8,7 @@ import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import SearchIcon from "@mui/icons-material/Search";
+import GroupsIcon from '@mui/icons-material/Groups';
 
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -29,6 +30,7 @@ const Sidebar = () => {
   console.log("Context API : refresh : ", refresh);
   const [conversations, setConversations] = useState([]);
   // console.log("Conversations of Sidebar : ", conversations);
+
   const userData = JSON.parse(localStorage.getItem("userData"));
   // console.log("Data from LocalStorage : ", userData);
   const nav = useNavigate();
@@ -38,6 +40,22 @@ const Sidebar = () => {
   }
 
   const user = userData.data;
+
+  const searchInSidebar = (query) => {
+
+    console.log(query);
+      // setSearch(query);
+      if(query.trim().length > 0){
+        const filteredConversations = conversations.filter((conversation) => ((!conversation.isGroupChat) ? (user.name === conversation.users[0].name) ? conversation.users[1].name : conversation.users[0].name : conversation.chatName).toLowerCase().startsWith(query.toLowerCase()));
+
+        setConversations(filteredConversations);
+      }
+      else{
+        setRefresh(!refresh);
+      }
+
+      
+  }
   
   useEffect(() => {
     console.log("Sidebar : ", user.token);
@@ -113,10 +131,15 @@ const Sidebar = () => {
           <SearchIcon />
         </IconButton>
 
-        <input placeholder="Search" className={"search-box" + (lightTheme ? "" : " dark")} />
+        <input placeholder="Search" className={"search-box" + (lightTheme ? "" : " dark")} onChange={(e) => {
+            searchInSidebar(e.target.value);
+          }} />
       </div>
 
       <div  className={"sb-chat" + (lightTheme ? "" : " dark")}>
+          {(conversations.length === 0) &&
+            <div className={"con-container" + (lightTheme ? "" : " dark")} ><p className={"con-title" + (lightTheme ? "" : " dark")}>No users or group</p></div>
+          }
         {conversations.map((conversation, index) => {
 
           {/* console.log("current convo : ", conversation.users); */}
@@ -124,7 +147,7 @@ const Sidebar = () => {
             return <div key={index}></div>;
           }
 
-          const chatUserName = (user.name === conversation.users[0].name) ? conversation.users[1].name : conversation.users[0].name;
+          const chatUserName = (!conversation.isGroupChat) ? (user.name === conversation.users[0].name) ? conversation.users[1].name : conversation.users[0].name : conversation.chatName;
           
           if (conversation.latestMessage === undefined || conversation.latestMessage === null) {
             // console.log("No Latest Message with ", conversation.users[1]);
@@ -147,14 +170,16 @@ const Sidebar = () => {
                       "chat/" +
                         conversation._id +
                         "&" +
-                        chatUserName
+                        chatUserName +
+                        "&" +
+                      conversation.isGroupChat
                     );
                   }}
                   // dispatch change to refresh so as to update chatArea
                 >
                 <div className="con-container">
                   <p className={"con-icon" + (lightTheme ? "" : " dark")}>
-                    {chatUserName[0]}
+                    {(!conversation.isGroupChat) ? chatUserName[0] : <GroupsIcon />}
                   </p>
                   <p className={"con-title" + (lightTheme ? "" : " dark")}>
                     {chatUserName}
@@ -178,15 +203,17 @@ const Sidebar = () => {
                 onClick={() => {
                   navigate(
                     "chat/" +
-                      conversation._id +
-                      "&" +
-                      chatUserName
+                    conversation._id +
+                        "&" +
+                        chatUserName +
+                        "&" +
+                      conversation.isGroupChat
                   );
                 }}
               >
               <div className="con-container">
                 <p className={"con-icon" + (lightTheme ? "" : " dark")}>
-                  {chatUserName[0]}
+                {(!conversation.isGroupChat) ? chatUserName[0] : <GroupsIcon />}
                 </p>
                 <p className={"con-title" + (lightTheme ? "" : " dark")}>
                   {chatUserName}

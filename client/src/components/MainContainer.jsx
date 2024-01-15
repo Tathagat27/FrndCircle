@@ -2,12 +2,11 @@ import { createContext, useState } from "react";
 import "./myStyles.css";
 import Sidebar from "./Sidebar";
 import { Outlet } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 
 export const myContext = createContext();
 const MainContainer = () => {
-  const dispatch = useDispatch();
   const lightTheme = useSelector((state) => state.themeKey);
   const [refresh, setRefresh] = useState(true);
   return (

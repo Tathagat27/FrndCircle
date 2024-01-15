@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import "./myStyles.css";
 
-const MsgOthers = ({props}) => {
+const MsgOthers = ({props, isGroupChat}) => {
 //   return (
 //     <div className="msgOthers">
 //       <p className="con-icon">S</p>
@@ -21,13 +21,13 @@ const MsgOthers = ({props}) => {
   return (
     <div className={"other-message-container" + (lightTheme ? "" : " dark")}>
       <div className={"msgOthers" + (lightTheme ? "" : " dark")}>
-        <p className={"chat-icon" + (lightTheme ? "" : " dark")}>
+      {(isGroupChat == 'true') ? <p className={"chat-icon" + (lightTheme ? "" : " dark")} style={{marginRight: "0.5vw"}}>
           {props.sender.name[0]}
-        </p>
+        </p> : <p></p>}
         <div className={"others-text-content" + (lightTheme ? "" : " dark")}>
-          {/* <p className={"con-title" + (lightTheme ? "" : " dark")}>
+          {(isGroupChat == 'true') && <p className={"chat-title" + (lightTheme ? "" : " dark")}>
             {props.sender.name}
-          </p> */}
+          </p> }
           <p className={"txt-msg" + (lightTheme ? "" : " dark")}>
             {props.content}
           </p>

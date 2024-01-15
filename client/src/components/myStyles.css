@@ -3,6 +3,12 @@
   color: lightgray !important;
 }
 
+.selected{
+  box-shadow: #00e500 0px 1px 2px 0px,
+    #00e500 0px 1px 3px 1px !important;
+  
+}
+
 .mainContainer {
   background-color: rgb(200, 206, 212);
   height: 90vh;
@@ -125,6 +131,13 @@ input {
   font-size: 0.85rem;
 }
 
+.chat-title{
+  grid-area: 1/2/2/4;
+  font-size: smaller;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.6);
+}
+
 .chat-icon {
 
   display: flex;
@@ -232,9 +245,11 @@ input {
 }
 
 .msgOthers {
-  display: grid;
+  /* display: grid;
   grid-template-columns: 32px auto auto;
-  grid-template-rows: auto auto;
+  grid-template-rows: auto auto; */
+
+  display: flex;
 
   padding: 10px;
   border-radius: 15px;
@@ -338,10 +353,12 @@ input {
   border-radius: 20px;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
     rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    
 }
 
 .create-group-input {
-  background: linear-gradient(rgba(128, 128, 128, 0.363), rgb(200, 206, 212));
+  /* background: linear-gradient(40deg, rgba(249, 249, 249, 0.363), rgb(232, 233, 235)); */
+  background-color: transparent;
   border-radius: 20px;
   padding: 10px 15px;
   margin: 5px;
@@ -484,6 +501,10 @@ input {
   justify-content: center;
   align-items: center;
   overflow: auto;
+}
+
+.ug-title{
+  padding-left: 1rem;
 }
 
 .avl-grp-area {

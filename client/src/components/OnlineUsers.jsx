@@ -27,6 +27,22 @@ const OnlineUsers = () => {
     nav(-1);
   }
 
+  const searchUsers = (query) => {
+
+    console.log(query);
+      // setSearch(query);
+      if(query.trim().length > 0){
+        const filteredUsers= users.filter((user) => user.name.toLowerCase().startsWith(query.toLowerCase()));
+
+        setUsers(filteredUsers);
+      }
+      else{
+        setRefresh(!refresh);
+      }
+
+      
+  }
+
   useEffect(() => {
     console.log("Users refreshed");
 
@@ -58,7 +74,7 @@ const OnlineUsers = () => {
             <img src={logo} alt="logo" />
           </div>
 
-          <p className={"ug-title" + (lightTheme ? "" : " dark")}>
+          <p className={"con-title" + (lightTheme ? "" : " dark")}>
             Available Users
           </p>
           <IconButton
@@ -79,6 +95,9 @@ const OnlineUsers = () => {
           <input
             placeholder="Search"
             className={"search-box" + (lightTheme ? "" : " dark")}
+            onChange={(e) => {
+              searchUsers(e.target.value);
+            }}
           />
         </div>
         <div className="avlUsersAndGrps">

@@ -4,13 +4,13 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import SendIcon from "@mui/icons-material/Send";
 import MsgOthers from "./MsgOthers";
 import MsgSelf from "./MsgSelf";
+import GroupsIcon from '@mui/icons-material/Groups';
 
-import { useContext, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Skeleton from "@mui/material/Skeleton";
 import axios from "axios";
-import { myContext } from "./MainContainer";
 
 import io from "socket.io-client";
 
@@ -23,8 +23,8 @@ const ChatArea = () => {
   const [messageContent, setMessageContent] = useState("");
   const dyParams = useParams();
   // console.log(dyParams);
-  const [chat_id, chat_user] = dyParams.id.split("&");
-  // console.log(chat_id, chat_user);
+  const [chat_id, chat_user, isGroupChat] = dyParams.id.split("&");
+  // console.log(chat_id, chat_user, isGroupChat);
   const userData = JSON.parse(localStorage.getItem("userData"));
   const [allMessages, setAllMessages] = useState([]);
 
@@ -98,6 +98,7 @@ const ChatArea = () => {
   
   useEffect(() => {
     console.log("Users refreshed");
+    setloaded(false);
     const config = {
       headers: {
         Authorization: `Bearer ${userData.data.token}`,
@@ -171,7 +172,7 @@ const ChatArea = () => {
       <div className={"chatArea-container" + (lightTheme ? "" : " dark")}>
         <div className={"ca-header" + (lightTheme ? "" : " dark")}>
           <p className={"con-icon" + (lightTheme ? "" : " dark")}>
-            {chat_user[0]}
+            {(isGroupChat === 'false') ? chat_user[0] : <GroupsIcon />}
           </p>
           <div className={"curr-chatUser" + (lightTheme ? "" : " dark")}>
             <p className={"ca-title" + (lightTheme ? "" : " dark")}>
@@ -201,7 +202,7 @@ const ChatArea = () => {
                 return <MsgSelf props={message} key={index} />;
               } else {
                 // console.log("Someone Sent it");
-                return <MsgOthers props={message} key={index} />;
+                return <MsgOthers props={message} isGroupChat={isGroupChat} key={index} />;
               }
             })}
             <div ref={messagesEndRef} />
