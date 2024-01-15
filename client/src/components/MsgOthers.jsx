@@ -28,7 +28,7 @@ const MsgOthers = ({props}) => {
           {/* <p className={"con-title" + (lightTheme ? "" : " dark")}>
             {props.sender.name}
           </p> */}
-          <p className={"con-lastMessage" + (lightTheme ? "" : " dark")}>
+          <p className={"txt-msg" + (lightTheme ? "" : " dark")}>
             {props.content}
           </p>
           {/* <p className="self-timeStamp">12:00am</p> */}

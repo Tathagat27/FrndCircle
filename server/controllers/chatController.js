@@ -5,7 +5,7 @@ import {User} from "../models/userModel.js";
 export const accessChat = asyncHandler(async (req, res) => {
   const { userId } = req.body;
 
-  console.log(userId);
+  // console.log(userId);
 
   if (!userId) {
     console.log("UserId param not sent with request");
@@ -27,7 +27,7 @@ export const accessChat = asyncHandler(async (req, res) => {
     select: "name email",
   });
 
-  console.log(isChat);
+  // console.log(isChat);
 
   if (isChat.length > 0) {
     res.send(isChat[0]);
@@ -54,7 +54,7 @@ export const accessChat = asyncHandler(async (req, res) => {
 
 export const fetchChats = asyncHandler(async (req, res) => {
   try {
-    console.log("Fetch Chats aPI : ", req);
+    // console.log("Fetch Chats aPI : ", req);
     Chat.find({ users: { $elemMatch: { $eq: req.user._id } } })
       .populate("users", "-password")
       .populate("groupAdmin", "-password")

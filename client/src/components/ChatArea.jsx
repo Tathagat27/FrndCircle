@@ -16,7 +16,7 @@ import io from "socket.io-client";
 
 const ENDPOINT = "http://localhost:8080";
 
-let socket,chat;
+let socket, chatCompare_id;
 
 const ChatArea = () => {
   const lightTheme = useSelector((state) => state.themeKey);
@@ -28,17 +28,21 @@ const ChatArea = () => {
   const userData = JSON.parse(localStorage.getItem("userData"));
   const [allMessages, setAllMessages] = useState([]);
 
-  const [allMessagesCopy, setAllMessagesCopy] = useState([]);
+  // const [allMessagesCopy, setAllMessagesCopy] = useState([]);
   // console.log("Chat area id : ", chat_id._id);
   // const refresh = useSelector((state) => state.refreshKey);
-  const { refresh, setRefresh } = useContext(myContext);
+  // const { refresh, setRefresh } = useContext(myContext);
   const [loaded, setloaded] = useState(false);
 
   const [socketConnectionStatus, setSocketConnectionStatus] = useState(false);
 
+  const scrollToBottom = () => {
+      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+  };
+
   const sendMessage = () => {
     // console.log("SendMessage Fired to", chat_id._id);
-    let data = null;
+
     const config = {
       headers: {
         Authorization: `Bearer ${userData.data.token}`,
@@ -53,13 +57,33 @@ const ChatArea = () => {
         },
         config
       )
-      .then(({response}) => {
-        data = response;
+      .then((response) => {
+        const data = response.data;
+        console.log(data);
         console.log("Message Fired");
+        socket.emit("new message", data);        
+        setAllMessages((allMessages) => [...allMessages, data]);
+        
+      })
+      .catch((error) => {
+        console.error('Axios Error:', error);
       });
 
-      socket.emit("newMessage", data);
+
   };
+
+  const handleNewMessage = (newMessage) => {
+    if(!chatCompare_id || chatCompare_id !== newMessage.chat._id){
+        // setAllMessages([...allMessages], newMessage);
+        console.log("true");
+    }
+    else{
+      console.log("false");
+      console.log(allMessages);
+      setAllMessages((allMessages) => [...allMessages, newMessage]);
+    }
+  };
+
 
   // connect to socket
 
@@ -71,27 +95,7 @@ const ChatArea = () => {
       setSocketConnectionStatus(!socketConnectionStatus);
     });
   }, []);
-
-  // new message recieved
-
-  useEffect(() => {
-    console.log("2nd useEffect");
-    socket.on("message recieved", (newMessage) => {
-      if(!allMessagesCopy || allMessagesCopy._id !== newMessage._id){
-        //  setAllMessages([...allMessages], newMessage);
-      }
-      else{
-        setAllMessages([...allMessages], newMessage);
-      }
-    });
-  }, []);
-
-
-  const messagesEndRef = useRef(null);
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
-  };
-
+  
   useEffect(() => {
     console.log("Users refreshed");
     const config = {
@@ -102,14 +106,33 @@ const ChatArea = () => {
     axios
       .get("http://localhost:8080/message/" + chat_id, config)
       .then(({ data }) => {
+        console.log(data);
         setAllMessages(data);
         setloaded(true);
         scrollToBottom();
         // console.log("Data from Acess Chat API ", data);
         socket.emit("join chat", chat_id);
+        // setAllMessages(allMessages);
       });
-      setAllMessagesCopy(allMessages);
-  }, [refresh, chat_id, userData.data.token, allMessages]);
+    
+      chatCompare_id = chat_id;
+  }, [chat_id, userData.data.token,]);
+
+  // new message recieved
+
+  useEffect(() => {
+    console.log("2nd useEffect");
+    scrollToBottom();
+    socket.on("message recieved", handleNewMessage);
+
+    return () => {
+      socket.off('message recieved', handleNewMessage);
+    };
+  });
+
+
+  const messagesEndRef = useRef(null);
+  
 
   if (!loaded) {
     return (
@@ -162,8 +185,11 @@ const ChatArea = () => {
             <DeleteIcon />
           </IconButton>
         </div>
+
+        
         
         <div className={"message-container" + (lightTheme ? "" : " dark")}>
+          {console.log(allMessages)}
           {allMessages
             .slice(0)
             .map((message, index) => {
@@ -194,7 +220,6 @@ const ChatArea = () => {
                 // console.log(event);
                 sendMessage();
                 setMessageContent("");
-                setRefresh(!refresh);
               }
             }}
           />
@@ -202,7 +227,6 @@ const ChatArea = () => {
             className={"icon" + (lightTheme ? "" : " dark")}
             onClick={() => {
               sendMessage();
-              setRefresh(!refresh);
             }}
           >
             <SendIcon />

@@ -40,7 +40,7 @@ const Sidebar = () => {
   const user = userData.data;
   
   useEffect(() => {
-    // console.log("Sidebar : ", user.token);
+    console.log("Sidebar : ", user.token);
     const config = {
       headers: {
         Authorization: `Bearer ${user.token}`,
@@ -119,7 +119,7 @@ const Sidebar = () => {
       <div  className={"sb-chat" + (lightTheme ? "" : " dark")}>
         {conversations.map((conversation, index) => {
 
-          console.log("current convo : ", conversation.users);
+          {/* console.log("current convo : ", conversation.users); */}
           if (conversation.users.length === 1) {
             return <div key={index}></div>;
           }
@@ -193,7 +193,7 @@ const Sidebar = () => {
                 </p>
 
                 <p className="con-lastMessage">
-                  {conversation.latestMessage.content}
+                  {(conversation.latestMessage.content.length < 33) ? (conversation.latestMessage.content) : (conversation.latestMessage.content.substring(0,33) + `...`)}
                 </p>
                 {/* <p className={"con-timeStamp" + (lightTheme ? "" : " dark")}>
                 {conversation.timeStamp}
