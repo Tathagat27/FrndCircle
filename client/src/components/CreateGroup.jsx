@@ -40,7 +40,6 @@ function CreateGroups() {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    console.log("Users refreshed");
 
     const config = {
       headers: {
@@ -77,7 +76,6 @@ function CreateGroups() {
 
   const searchUsers = (query) => {
 
-    console.log(query);
       // setSearch(query);
       if(query.trim().length > 0){
         const filteredUsers= users.filter((user) => user.name.toLowerCase().startsWith(query.toLowerCase()));
@@ -90,9 +88,6 @@ function CreateGroups() {
 
       
   }
-
-
-  console.log("User Data from CreateGroups : ", userData);
 
   const createGroup = () => {
     const config = {
@@ -108,7 +103,11 @@ function CreateGroups() {
         users: JSON.stringify(selectedUsers.map((u) => u._id)),
       },
       config
-    );
+    )
+    .then(() => {
+      // console.log("Created group", groupName);
+      dispatch(refreshSidebarFun());
+    });
     nav("/app/groups");
   };
 
@@ -136,7 +135,7 @@ function CreateGroups() {
               onClick={() => {
                 createGroup();
                 handleClose();
-                dispatch(refreshSidebarFun());
+                
               }}
               autoFocus
             >
@@ -215,7 +214,7 @@ function CreateGroups() {
                 className={"list-tem" + (lightTheme ? "" : " dark")}
                 key={index}
                 onClick={() => {
-                  console.log("Selecting User : ", user.name);
+                  // console.log("Selecting User : ", user.name);
                   handleSelect(user);
                 }}
               >

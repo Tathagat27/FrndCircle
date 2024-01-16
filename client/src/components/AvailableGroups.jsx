@@ -30,7 +30,7 @@ function Groups() {
 
   const searchGroups = (query) => {
 
-    console.log(query);
+    // console.log(query);
       // setSearch(query);
       if(query.trim().length > 0){
         const filteredGroups= groups.filter((group) => group.chatName.toLowerCase().startsWith(query.toLowerCase()));
@@ -46,7 +46,6 @@ function Groups() {
 
   const user = userData.data;
   useEffect(() => {
-    console.log("Users refreshed : ", user.token);
     const config = {
       headers: {
         Authorization: `Bearer ${user.token}`,
@@ -56,7 +55,7 @@ function Groups() {
     axios
       .get(`${BASE_URL}/chat/fetchGroups`, config)
       .then((response) => {
-        console.log("Group Data from API ", response.data);
+        // console.log("Group Data from API ", response.data);
         setGroups(response.data);
       });
   }, [refresh]);
@@ -105,7 +104,6 @@ function Groups() {
           />
         </div>
         <div className={"avlUsersAndGrps" + (lightTheme ? "" : " dark")}>
-        {console.log(groups)}
           {groups.map((group, index) => {
             return (
               <motion.div
@@ -114,7 +112,7 @@ function Groups() {
                 className={"list-tem" + (lightTheme ? "" : " dark")}
                 key={index}
                 onClick={() => {
-                  console.log("Creating chat with group", group.chatName);
+                  // console.log("Creating chat with group", group.chatName);
                   const config = {
                     headers: {
                       Authorization: `Bearer ${userData.data.token}`,

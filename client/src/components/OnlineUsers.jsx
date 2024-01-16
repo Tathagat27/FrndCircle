@@ -29,8 +29,6 @@ const OnlineUsers = () => {
   }
 
   const searchUsers = (query) => {
-
-    console.log(query);
       // setSearch(query);
       if(query.trim().length > 0){
         const filteredUsers= users.filter((user) => user.name.toLowerCase().startsWith(query.toLowerCase()));
@@ -45,7 +43,6 @@ const OnlineUsers = () => {
   }
 
   const createChat = (user) => {
-    console.log("Creating chat with ", user.name);
     const config = {
       headers: {
         Authorization: `Bearer ${userData.data.token}`,
@@ -57,11 +54,16 @@ const OnlineUsers = () => {
         userId: user._id,
       },
       config
-    );
+    )
+    .then(() => {
+      
+    // console.log("Created chat with ", user.name);
+      dispatch(refreshSidebarFun());
+    });
+    nav("/app/welcome");
   }
 
   useEffect(() => {
-    console.log("Users refreshed");
 
     const config = {
       headers: {
@@ -70,7 +72,7 @@ const OnlineUsers = () => {
     };
 
     axios.get(`${BASE_URL}/user/fetchUsers`, config).then((data) => {
-      console.log("User Data from API", data);
+      // console.log("User Data from API", data);
       setUsers(data.data);
     });
   }, [refresh]);
@@ -127,8 +129,6 @@ const OnlineUsers = () => {
                 key={index}
                 onClick={() => {
                   createChat(user);
-                  setRefresh(!refresh);
-                  dispatch(refreshSidebarFun());
                 }}
               >
               

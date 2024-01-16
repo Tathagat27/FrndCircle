@@ -89,7 +89,7 @@ export const createGroupChat = asyncHandler(async (req, res) => {
   }
 
   var users = JSON.parse(req.body.users);
-  console.log("chatController/createGroups : ", req);
+  // console.log("chatController/createGroups : ", req);
   users.push(req.user);
 
   try {

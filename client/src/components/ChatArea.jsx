@@ -59,8 +59,8 @@ const ChatArea = () => {
       )
       .then((response) => {
         const data = response.data;
-        console.log(data);
-        console.log("Message Fired");
+        // console.log(data);
+        // console.log("Message Fired");
         socket.emit("new message", data);        
         setAllMessages((allMessages) => [...allMessages, data]);
         
@@ -75,11 +75,11 @@ const ChatArea = () => {
   const handleNewMessage = (newMessage) => {
     if(!chatCompare_id || chatCompare_id !== newMessage.chat._id){
         // setAllMessages([...allMessages], newMessage);
-        console.log("true");
+        // console.log("true");
     }
     else{
-      console.log("false");
-      console.log(allMessages);
+      // console.log("false");
+      // console.log(allMessages);
       setAllMessages((allMessages) => [...allMessages, newMessage]);
     }
   };
@@ -88,7 +88,6 @@ const ChatArea = () => {
   // connect to socket
 
   useEffect(() => {
-    console.log("first useEffect");
     socket = io(BASE_URL);
     socket.emit("setup", userData);
     socket.on("connection", () => {
@@ -97,7 +96,7 @@ const ChatArea = () => {
   }, []);
   
   useEffect(() => {
-    console.log("Users refreshed");
+    // console.log("Users refreshed");
     setloaded(false);
     const config = {
       headers: {
@@ -107,7 +106,7 @@ const ChatArea = () => {
     axios
       .get(`${BASE_URL}/message/` + chat_id, config)
       .then(({ data }) => {
-        console.log(data);
+        // console.log(data);
         setAllMessages(data);
         setloaded(true);
         scrollToBottom();
@@ -122,7 +121,7 @@ const ChatArea = () => {
   // new message recieved
 
   useEffect(() => {
-    console.log("2nd useEffect");
+    // console.log("2nd useEffect");
     scrollToBottom();
     socket.on("message recieved", handleNewMessage);
 
@@ -190,7 +189,6 @@ const ChatArea = () => {
         
         
         <div className={"message-container" + (lightTheme ? "" : " dark")}>
-          {console.log(allMessages)}
           {allMessages
             .slice(0)
             .map((message, index) => {

@@ -28,7 +28,7 @@ const Sidebar = () => {
   const lightTheme = useSelector((state) => state.themeKey);
   const refreshSidebar = useSelector((state) => state.refreshKey);
   const { refresh, setRefresh } = useContext(myContext);
-  console.log("Context API : refresh : ", refresh);
+  // console.log("Context API : refresh : ", refresh);
   const [conversations, setConversations] = useState([]);
   // console.log("Conversations of Sidebar : ", conversations);
 
@@ -43,8 +43,6 @@ const Sidebar = () => {
   const user = userData.data;
 
   const searchInSidebar = (query) => {
-
-    console.log(query);
       // setSearch(query);
       if(query.trim().length > 0){
         const filteredConversations = conversations.filter((conversation) => ((!conversation.isGroupChat) ? (user.name === conversation.users[0].name) ? conversation.users[1].name : conversation.users[0].name : conversation.chatName).toLowerCase().startsWith(query.toLowerCase()));
@@ -66,7 +64,7 @@ const Sidebar = () => {
     };
 
     axios.get(`${BASE_URL}/chat/`, config).then((response) => {
-      console.log("Data refresh in sidebar ", response.data);
+      // console.log("Data refresh in sidebar ", response.data);
       setConversations(response.data);
       // setRefresh(!refresh);
     });
@@ -157,7 +155,7 @@ const Sidebar = () => {
             <div
                 key={index}
                 onClick={() => {
-                  console.log("Refresh fired from sidebar");
+                  // console.log("Refresh fired from sidebar");
                   // dispatch(refreshSidebarFun());
                   setRefresh(!refresh);
                 }}

@@ -35,7 +35,7 @@ const Login = () => {
         config
       );
 
-      console.log(response);
+      // console.log(response);
 
       setLogInStatus({ msg: "Success", key: Math.random() });
       nav("/app/welcome")
@@ -43,7 +43,7 @@ const Login = () => {
 
     }
    catch (error) {
-    console.log(error);
+    //  console.log(error);
     if(error.response && error.response.status === 400){
         setLogInStatus({
           msg: "All necessary input fields have not been filled",

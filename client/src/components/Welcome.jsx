@@ -11,7 +11,7 @@ const Welcome = () => {
   const lightTheme = useSelector((state) => state.themeKey);
 
   const userData = JSON.parse(localStorage.getItem("userData"))
-  console.log(userData);
+  // console.log(userData);
 
   const nav = useNavigate();
   if(!userData){

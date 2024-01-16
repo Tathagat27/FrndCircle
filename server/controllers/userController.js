@@ -13,7 +13,7 @@ export const loginController = async (req, res) => {
   }
 
   const user = await User.findOne({ name });
-  console.log(user);
+  // console.log(user);
 
   if (user && (await user.matchPassword(password))) {
     res.json({
@@ -56,7 +56,7 @@ export const signupController = expressAsyncHandler(async (req, res) => {
   // Create an entry  in the db
   const user = await User.create({ name, email, password });
 
-  console.log(user);
+  // console.log(user);
 
   if (user) {
     res.status(201).json({
