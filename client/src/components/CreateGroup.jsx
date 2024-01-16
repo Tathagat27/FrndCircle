@@ -20,6 +20,7 @@ import { myContext } from "./MainContainer.jsx";
 import { refreshSidebarFun } from "../features/refreshSidebar.js";
 
 function CreateGroups() {
+  const BASE_URL = import.meta.env.VITE_APP_BASE_URL;
   const { refresh, setRefresh } = useContext(myContext);
   const lightTheme = useSelector((state) => state.themeKey);
   const userData = JSON.parse(localStorage.getItem("userData"));
@@ -46,7 +47,7 @@ function CreateGroups() {
       },
     };
 
-    axios.get("http://localhost:8080/user/fetchUsers", config).then((data) => {
+    axios.get(`${BASE_URL}/user/fetchUsers`, config).then((data) => {
       // console.log("User Data from API", data);
       setUsers(data.data);
     });
@@ -84,7 +85,7 @@ function CreateGroups() {
     };
 
     axios.post(
-      "http://localhost:8080/chat/createGroup",
+      `${BASE_URL}/chat/createGroup`,
       {
         name: groupName,
         users: JSON.stringify(selectedUsers.map((u) => u._id)),

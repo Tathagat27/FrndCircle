@@ -8,6 +8,7 @@ import axios from "axios";
 
 const Login = () => {
 
+  const BASE_URL = import.meta.env.VITE_APP_BASE_URL;
   const [userData, setUserData] = useState({name: "", password: ""});
   const [loading, setLoading] = useState(false);
   const [loginStatus, setLogInStatus] = useState("");
@@ -29,7 +30,7 @@ const Login = () => {
       };
 
       const response = await axios.post(
-        "http://localhost:8080/user/login/",
+        `${BASE_URL}/user/login/`,
         userData,
         config
       );

@@ -11,6 +11,8 @@ const Signup = () => {
   const [loading, setLoading] = useState(false);
   const [signupStatus, setSignupStatus] = useState("");
 
+  const BASE_URL = import.meta.env.VITE_APP_BASE_URL;
+
   const nav = useNavigate();
 
   const changeHandler = (e) => {
@@ -28,7 +30,7 @@ const Signup = () => {
       };
 
       const response = await axios.post(
-        "http://localhost:8080/user/signup/",
+        `${BASE_URL}/user/signup/`,
         userData,
         config
       );

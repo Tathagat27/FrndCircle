@@ -13,6 +13,7 @@ import { myContext } from "./MainContainer";
 import GroupsIcon from '@mui/icons-material/Groups';
 
 function Groups() {
+  const BASE_URL = import.meta.env.VITE_APP_BASE_URL;
   // const [refresh, setRefresh] = useState(true);
   const { refresh, setRefresh } = useContext(myContext);
 
@@ -53,7 +54,7 @@ function Groups() {
     };
 
     axios
-      .get("http://localhost:8080/chat/fetchGroups", config)
+      .get(`${BASE_URL}/chat/fetchGroups`, config)
       .then((response) => {
         console.log("Group Data from API ", response.data);
         setGroups(response.data);
@@ -120,7 +121,7 @@ function Groups() {
                     },
                   };
                   axios.post(
-                    "http://localhost:8080/chat/createGroup",
+                    `${BASE_URL}/chat/createGroup`,
                     {
                       userId: user._id,
                     },

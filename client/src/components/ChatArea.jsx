@@ -14,7 +14,7 @@ import axios from "axios";
 
 import io from "socket.io-client";
 
-const ENDPOINT = "http://localhost:8080";
+const BASE_URL = import.meta.env.VITE_APP_BASE_URL;
 
 let socket, chatCompare_id;
 
@@ -50,7 +50,7 @@ const ChatArea = () => {
     };
     axios
       .post(
-        "http://localhost:8080/message/",
+        `${BASE_URL}/message/`,
         {
           content: messageContent,
           chatId: chat_id,
@@ -89,7 +89,7 @@ const ChatArea = () => {
 
   useEffect(() => {
     console.log("first useEffect");
-    socket = io(ENDPOINT);
+    socket = io(JSON.stringify(BASE_URL));
     socket.emit("setup", userData);
     socket.on("connection", () => {
       setSocketConnectionStatus(!socketConnectionStatus);
@@ -105,7 +105,7 @@ const ChatArea = () => {
       },
     };
     axios
-      .get("http://localhost:8080/message/" + chat_id, config)
+      .get(`${BASE_URL}/message/` + chat_id, config)
       .then(({ data }) => {
         console.log(data);
         setAllMessages(data);

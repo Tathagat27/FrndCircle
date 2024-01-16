@@ -22,6 +22,7 @@ import { IconButton } from "@mui/material";
 import { Link } from "react-router-dom";
 
 const Sidebar = () => {
+  const BASE_URL = import.meta.env.VITE_APP_BASE_URL;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const lightTheme = useSelector((state) => state.themeKey);
@@ -65,7 +66,7 @@ const Sidebar = () => {
       },
     };
 
-    axios.get("http://localhost:8080/chat/", config).then((response) => {
+    axios.get(`${BASE_URL}/chat/`, config).then((response) => {
       console.log("Data refresh in sidebar ", response.data);
       setConversations(response.data);
       // setRefresh(!refresh);
