@@ -59,7 +59,6 @@ const Sidebar = () => {
   }
   
   useEffect(() => {
-    console.log("Sidebar : ", user.token);
     const config = {
       headers: {
         Authorization: `Bearer ${user.token}`,
@@ -178,7 +177,7 @@ const Sidebar = () => {
                   }}
                   // dispatch change to refresh so as to update chatArea
                 >
-                <div className="con-container">
+                <div className={"con-container" + (lightTheme ? "" : " dark")}>
                   <p className={"con-icon" + (lightTheme ? "" : " dark")}>
                     {(!conversation.isGroupChat) ? chatUserName[0] : <GroupsIcon />}
                   </p>

@@ -89,7 +89,7 @@ const ChatArea = () => {
 
   useEffect(() => {
     console.log("first useEffect");
-    socket = io(JSON.stringify(BASE_URL));
+    socket = io(BASE_URL);
     socket.emit("setup", userData);
     socket.on("connection", () => {
       setSocketConnectionStatus(!socketConnectionStatus);

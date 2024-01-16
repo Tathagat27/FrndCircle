@@ -91,7 +91,7 @@ function Groups() {
           </IconButton>
         </div>
 
-        <div className="avl-grp-area">
+        <div className={"avl-grp-area" + (lightTheme ? "" : " dark")}>
         <div className={"sb-search" + (lightTheme ? "" : " dark")}>
           <IconButton className={"icon" + (lightTheme ? "" : " dark")}>
             <SearchIcon />
@@ -104,7 +104,7 @@ function Groups() {
             }}
           />
         </div>
-        <div className="avlUsersAndGrps">
+        <div className={"avlUsersAndGrps" + (lightTheme ? "" : " dark")}>
         {console.log(groups)}
           {groups.map((group, index) => {
             return (
@@ -130,7 +130,7 @@ function Groups() {
                   dispatch(refreshSidebarFun());
                 }}
               >
-              <div className="avl-users-grps-container">
+              <div className={"avl-users-grps-container" + (lightTheme ? "" : " dark")}>
                 <p className={"con-icon" + (lightTheme ? "" : " dark")}>
                   <GroupsIcon />
                 </p>

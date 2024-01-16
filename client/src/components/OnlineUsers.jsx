@@ -103,7 +103,7 @@ const OnlineUsers = () => {
             <RefreshIcon />
           </IconButton>
         </div>
-        <div className="avl-grp-area">
+        <div className={"avl-grp-area" + (lightTheme ? "" : " dark")}>
 
         <div className={"sb-search" + (lightTheme ? "" : " dark")}>
           <IconButton className={"icon" + (lightTheme ? "" : " dark")}>
@@ -117,7 +117,7 @@ const OnlineUsers = () => {
             }}
           />
         </div>
-        <div className="avlUsersAndGrps">
+        <div className={"avlUsersAndGrps" + (lightTheme ? "" : " dark")}>
           {users.map((user, index) => {
             return (
               <motion.div
@@ -127,11 +127,12 @@ const OnlineUsers = () => {
                 key={index}
                 onClick={() => {
                   createChat(user);
+                  setRefresh(!refresh);
                   dispatch(refreshSidebarFun());
                 }}
               >
               
-          <div className="avl-users-grps-container">
+          <div className={"avl-users-grps-container" + (lightTheme ? "" : " dark")}>
                 <p className={"con-icon" + (lightTheme ? "" : " dark")}>{user.name[0]}</p>
                 <div className="curr-chatUser">
                 <p className={"ca-title" + (lightTheme ? "" : " dark")}>

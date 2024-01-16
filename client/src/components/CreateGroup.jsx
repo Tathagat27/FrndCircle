@@ -1,3 +1,4 @@
+import "./myStyles.css";
 import React, { useContext, useEffect, useState } from "react";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import {
@@ -72,6 +73,22 @@ function CreateGroups() {
     }
     // console.log(selectedUsers);
     
+  }
+
+  const searchUsers = (query) => {
+
+    console.log(query);
+      // setSearch(query);
+      if(query.trim().length > 0){
+        const filteredUsers= users.filter((user) => user.name.toLowerCase().startsWith(query.toLowerCase()));
+
+        setUsers(filteredUsers);
+      }
+      else{
+        setRefresh(!refresh);
+      }
+
+      
   }
 
 
@@ -175,7 +192,7 @@ function CreateGroups() {
             <RefreshIcon />
           </IconButton>
         </div>
-        <div className="avl-grp-area">
+        <div className={"avl-grp-area" + (lightTheme ? "" : " dark")}>
 
         <div className={"sb-search" + (lightTheme ? "" : " dark")}>
           <IconButton className={"icon" + (lightTheme ? "" : " dark")}>
@@ -184,9 +201,12 @@ function CreateGroups() {
           <input
             placeholder="Search"
             className={"search-box" + (lightTheme ? "" : " dark")}
+            onChange={(e) => {
+              searchUsers(e.target.value);
+            }}
           />
         </div>
-        <div className="avlUsersAndGrps">
+        <div className={"avlUsersAndGrps" + (lightTheme ? "" : " dark")}>
           {users.map((user, index) => {
             return (
               <motion.div
@@ -200,7 +220,7 @@ function CreateGroups() {
                 }}
               >
               
-          <div className={"avl-users-grps-container" + ((selectedUsers.includes(user)) ? ' selected' : '')}>
+          <div className={"avl-users-grps-container" + ((selectedUsers.includes(user)) ? ' selected' : '') + (lightTheme ? "" : " dark")}>
                 <p className={"con-icon" + (lightTheme ? "" : " dark")}>{user.name[0]}</p>
                 <div className="curr-chatUser">
                 <p className={"ca-title" + (lightTheme ? "" : " dark")}>
