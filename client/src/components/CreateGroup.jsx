@@ -175,7 +175,7 @@ function CreateGroups() {
         transition={{
           duration: "0.3",
         }}
-        className="availableOnline"
+        className="avaOnline"
       >
         <div className={"avl-header" + (lightTheme ? "" : " dark")}>
 
